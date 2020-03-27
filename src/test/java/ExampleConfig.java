@@ -1,12 +1,10 @@
-package quarkus.extension.dynamic.config;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
 @Singleton
-public class Config {
+public class ExampleConfig {
 
     @ConfigProperty(name = "email", defaultValue = "")
     Provider<String> email;
