@@ -1,3 +1,5 @@
+package quarkus.extension.dynamic.config.test;
+
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.inject.Provider;
