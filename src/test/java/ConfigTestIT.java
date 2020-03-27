@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 
 @QuarkusTest
-public class ConfigTest {
+public class ConfigTestIT {
 
     @Inject
     private ExampleConfig exampleConfig;

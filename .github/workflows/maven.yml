@@ -36,3 +36,7 @@ jobs:
       env: 
         filePath: example.json
       run: mvn clean test
+    - name: Native Test
+        env:
+          filePath: example.json
+        run: mvn verify -Pnative
