@@ -48,4 +48,4 @@ jobs:
           filePath: example.json
         run: |
           gu install native-image
-          mvn verify -Pnative
+          mvn test-compile failsafe:integration-test
