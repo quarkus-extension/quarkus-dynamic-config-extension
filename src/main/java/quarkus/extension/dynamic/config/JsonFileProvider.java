@@ -10,14 +10,15 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 public class JsonFileProvider implements ConfigProvider {
     private Map<String, String> cache;
-    private String filePath;
+    private Optional<String> filePath;
     Map<String, String> data = new HashMap<>();
 
     public JsonFileProvider(Config config) {
-        filePath = config.getValue("filePath", String.class);
+        filePath = config.getOptionalValue("filePath", String.class);
         cache = getProperties();
     }
 
@@ -27,7 +28,7 @@ public class JsonFileProvider implements ConfigProvider {
     }
 
     private Map<String, String> getProperties() {
-        String jsonData = this.readFile(filePath);
+        String jsonData = this.readFile(filePath.orElse("configuration.json"));
         cache = parse(jsonData);
         return cache;
     }
