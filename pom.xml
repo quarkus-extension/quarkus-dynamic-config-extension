@@ -98,6 +98,7 @@
                             <systemProperties>
                                 <native.image.path>${project.build.directory}/${project.build.finalName}-runner
                                 </native.image.path>
+                                <quarkus.http.test-port>8080</quarkus.http.test-port>
                             </systemProperties>
                         </configuration>
                     </execution>

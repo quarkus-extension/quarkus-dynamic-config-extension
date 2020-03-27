@@ -28,7 +28,10 @@ public class JsonFileProvider implements ConfigProvider {
     }
 
     private Map<String, String> getProperties() {
-        String jsonData = this.readFile(filePath.orElse("configuration.json"));
+        if (!filePath.isPresent()) {
+            return new HashMap<>();
+        }
+        String jsonData = this.readFile(filePath.get());
         cache = parse(jsonData);
         return cache;
     }
