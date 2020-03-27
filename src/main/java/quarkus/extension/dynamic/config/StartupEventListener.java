@@ -13,10 +13,13 @@ public class StartupEventListener {
     private Config beanManager;
 
     public void startEvent(@Observes StartupEvent ev) throws InterruptedException {
-        for (; ; ) {
+        for (;;) {
             String aLong = beanManager.email.get();
-            System.out.println(aLong);
+            String aLong2 = beanManager.age.get();
+
             Thread.sleep(1000);
+            System.out.println(aLong);
+            System.out.println(aLong2);
         }
     }
 }

@@ -1,20 +1,23 @@
 package quarkus.extension.dynamic.config;
 
-import javax.json.Json;
-import javax.json.stream.JsonParser;
+import org.eclipse.microprofile.config.Config;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.StringReader;
-import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class JsonFileProvider implements ConfigProvider {
     private Map<String, String> cache;
-    private String fileLocation = System.getProperty("user.dir").split("target")[0]
-            + "/example.json";
+    private String filePath;
+    Map<String, String> data = new HashMap<>();
 
-    public JsonFileProvider() {
+    public JsonFileProvider(Config config) {
+        filePath = config.getValue("filePath", String.class);
         cache = getProperties();
     }
 
@@ -24,37 +27,9 @@ public class JsonFileProvider implements ConfigProvider {
     }
 
     private Map<String, String> getProperties() {
-        Map<String, String> m = new HashMap<>();
-        String jsonData = this.readFile(this.fileLocation);
-        JsonParser parser = Json.createParser(new StringReader(jsonData));
-        String key = null;
-        while (parser.hasNext()) {
-            final JsonParser.Event event = parser.next();
-            switch (event) {
-                case KEY_NAME:
-                    key = parser.getString();
-                    break;
-                case VALUE_STRING:
-                    String string = parser.getString();
-                    m.put(key, string);
-                    break;
-                case VALUE_NUMBER:
-                    BigDecimal number = parser.getBigDecimal();
-                    m.put(key, number.toString());
-                    break;
-                case VALUE_TRUE:
-                    m.put(key, "true");
-                    break;
-                case VALUE_FALSE:
-                    m.put(key, "false");
-                    break;
-                default:
-                    break;
-            }
-        }
-        parser.close();
-        cache = m;
-        return m;
+        String jsonData = this.readFile(filePath);
+        cache = parse(jsonData);
+        return cache;
     }
 
     public String readFile(String fileName) {
@@ -73,5 +48,54 @@ public class JsonFileProvider implements ConfigProvider {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public Map<String, String> parse(String grandParentKey, String parentKey, JSONObject json) throws JSONException {
+        Iterator<String> keys = json.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            Object val;
+
+            val = json.get(key);
+
+            if (val.getClass().getTypeName().contains("JSONArray")) {
+                JSONArray jArr = (JSONArray) val;
+                for (int i = 0; i < jArr.length(); i++) {
+                    JSONObject childJSONObject = jArr.getJSONObject(i);
+                    parse(parentKey, key, childJSONObject);
+                }
+
+            } else if (val.getClass().getTypeName().equals("org.json.JSONObject")) {
+                parse(parentKey, key, (JSONObject) val);
+
+            } else {
+                if (val.getClass().getTypeName().equals("org.json.JSONObject$Null")) {
+                    val = "null";
+                }
+                String s1;
+                if (!grandParentKey.isEmpty()) {
+                    s1 = grandParentKey + "." + parentKey + "." + key;
+                } else if (!parentKey.isEmpty()) {
+                    s1 = parentKey + "." + key;
+
+                } else {
+                    s1 = key;
+                }
+                data.put(s1, val.toString());
+            }
+        }
+
+        return data;
+    }
+
+    private Map<String, String> parse(String json) {
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+
+            return parse("", "", jsonObj);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

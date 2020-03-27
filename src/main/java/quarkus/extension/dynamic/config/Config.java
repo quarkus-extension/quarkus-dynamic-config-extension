@@ -10,5 +10,7 @@ public class Config {
 
     @ConfigProperty(name = "email", defaultValue = "")
     Provider<String> email;
-}
 
+    @ConfigProperty(name = "info.age", defaultValue = "")
+    Provider<String> age;
+}
