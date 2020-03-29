@@ -1,1 +1,1 @@
-quarkus.extension.dynamic.config.CustomConfigSource
+quarkus.extension.dynamic.config.DynamicConfigSource

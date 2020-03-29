@@ -7,11 +7,11 @@ import org.eclipse.microprofile.config.spi.ConfigSource;
 import java.util.Map;
 import java.util.Set;
 
-public class CustomConfigSource implements ConfigSource {
+public class DynamicConfigSource implements ConfigSource {
     private Config config;
     ConfigProvider configProvider = null;
 
-    public CustomConfigSource() {
+    public DynamicConfigSource() {
         config = createConfig();
     }
 
