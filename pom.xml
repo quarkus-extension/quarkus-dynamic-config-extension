@@ -48,6 +48,11 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
+        <dependency>
+            <groupId>com.orbitz.consul</groupId>
+            <artifactId>consul-client</artifactId>
+            <version>1.4.0</version>
+        </dependency>
 
         <dependency>
             <groupId>io.quarkus</groupId>

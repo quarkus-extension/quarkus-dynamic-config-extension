@@ -1,1 +1,2 @@
-quarkus.extension.dynamic.config.DynamicConfigSource
+quarkus.extension.dynamic.config.FileSource
+quarkus.extension.dynamic.config.ConsulSource

@@ -12,12 +12,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
-public class JsonFileProvider implements ConfigProvider {
+public class JsonFileProviderDynamic implements DynamicConfigProvider {
     private Map<String, String> cache;
     private Optional<String> filePath;
     Map<String, String> data = new HashMap<>();
 
-    public JsonFileProvider(Config config) {
+    public JsonFileProviderDynamic(Config config) {
         filePath = config.getOptionalValue("filePath", String.class);
         cache = getProperties();
     }

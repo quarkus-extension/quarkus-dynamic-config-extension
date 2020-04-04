@@ -7,11 +7,11 @@ import org.eclipse.microprofile.config.spi.ConfigSource;
 import java.util.Map;
 import java.util.Set;
 
-public class DynamicConfigSource implements ConfigSource {
+public class FileSource implements ConfigSource {
     private Config config;
-    ConfigProvider configProvider = null;
+    DynamicConfigProvider dynamicConfigProvider = null;
 
-    public DynamicConfigSource() {
+    public FileSource() {
         config = createConfig();
     }
 
@@ -24,7 +24,7 @@ public class DynamicConfigSource implements ConfigSource {
     public Map<String, String> getProperties() {
         initFileProvider();
 
-        return configProvider.get();
+        return dynamicConfigProvider.get();
     }
 
     @Override
@@ -44,8 +44,8 @@ public class DynamicConfigSource implements ConfigSource {
     }
 
     private void initFileProvider() {
-        if (configProvider == null) {
-            configProvider = new JsonFileProvider(config);
+        if (dynamicConfigProvider == null) {
+            dynamicConfigProvider = new JsonFileProviderDynamic(config);
         }
     }
 

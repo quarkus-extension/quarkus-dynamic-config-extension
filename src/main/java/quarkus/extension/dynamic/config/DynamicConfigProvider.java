@@ -2,7 +2,7 @@ package quarkus.extension.dynamic.config;
 
 import java.util.Map;
 
-public interface ConfigProvider {
+public interface DynamicConfigProvider {
     Map<String, String> get();
 }
 
