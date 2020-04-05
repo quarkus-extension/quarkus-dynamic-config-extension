@@ -24,10 +24,10 @@ public class ProviderSelector {
     }
 
     private boolean isFilePathExist(Config config) {
-        return Objects.nonNull(config.getOptionalValue("filePath", String.class).orElse(null));
+        return Objects.nonNull(config.getOptionalValue("CONFIG_FILE_PATH", String.class).orElse(null));
     }
 
     private boolean isConsulConfigExist(Config config) {
-        return Objects.nonNull(config.getOptionalValue("consul_addr", String.class).orElse(null));
+        return Objects.nonNull(config.getOptionalValue("CONSUL_HTTP_ADDR", String.class).orElse(null));
     }
 }
