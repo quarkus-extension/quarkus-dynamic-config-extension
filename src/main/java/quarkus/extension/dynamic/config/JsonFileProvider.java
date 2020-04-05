@@ -12,19 +12,19 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
-public class JsonFileProviderDynamic implements DynamicConfigProvider {
+public class JsonFileProvider implements DynamicConfigProvider {
     private Map<String, String> cache;
     private Optional<String> filePath;
-    Map<String, String> data = new HashMap<>();
+    private Map<String, String> data = new HashMap<>();
 
-    public JsonFileProviderDynamic(Config config) {
+    public JsonFileProvider(Config config) {
         filePath = config.getOptionalValue("filePath", String.class);
         cache = getProperties();
     }
 
     @Override
-    public Map<String, String> get() {
-        return cache;
+    public String get(String key) {
+        return cache.getOrDefault(key, null);
     }
 
     private Map<String, String> getProperties() {

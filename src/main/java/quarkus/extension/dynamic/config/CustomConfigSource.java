@@ -4,15 +4,18 @@ import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FileSource implements ConfigSource {
+public class CustomConfigSource implements ConfigSource {
     private Config config;
-    DynamicConfigProvider dynamicConfigProvider = null;
+    private DynamicConfigProvider providerSelector;
 
-    public FileSource() {
+    public CustomConfigSource() {
         config = createConfig();
+        providerSelector = new ProviderSelector(config).getProvider();
+
     }
 
     @Override
@@ -21,32 +24,23 @@ public class FileSource implements ConfigSource {
     }
 
     @Override
-    public Map<String, String> getProperties() {
-        initFileProvider();
-
-        return dynamicConfigProvider.get();
-    }
-
-    @Override
     public Set<String> getPropertyNames() {
         return getProperties().keySet();
     }
 
     @Override
+    public Map<String, String> getProperties() {
+        return new HashMap<>();
+    }
+
+    @Override
     public String getValue(String key) {
-        initFileProvider();
-        return getProperties().get(key);
+        return providerSelector.get(key);
     }
 
     @Override
     public String getName() {
         return "CustomConfigSource";
-    }
-
-    private void initFileProvider() {
-        if (dynamicConfigProvider == null) {
-            dynamicConfigProvider = new JsonFileProviderDynamic(config);
-        }
     }
 
     private Config createConfig() {
