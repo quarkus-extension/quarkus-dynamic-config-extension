@@ -18,7 +18,7 @@ public class JsonFileProvider implements DynamicConfigProvider {
     private Map<String, String> data = new HashMap<>();
 
     public JsonFileProvider(Config config) {
-        filePath = config.getOptionalValue("filePath", String.class);
+        filePath = config.getOptionalValue("CONFIG_FILE_PATH", String.class);
         cache = getProperties();
     }
 
