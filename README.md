@@ -1,11 +1,14 @@
 # Quarkus Dynamic Config Extension
 
-Quarkus dynamic config watches file and change value at runtime
+- File Based Changes:
+
+Quarkus dynamic extension watches config file and changes value at runtime
+
+- Consul Based Changes:
+
 
 ### Dependency
 - maven:
-
-The ngrok extension is not available in Maven Central. For now you have to clone the repository and install the extension in your local maven repository.
 
 ```xml
 <dependency>
@@ -14,8 +17,15 @@ The ngrok extension is not available in Maven Central. For now you have to clone
       <version>0.0.1</version>
 </dependency>
 ```
-### Configuration
+
+### Listen File Based Changes
 ```xml
-export filePath= "/deneme.json"
+export CONFIG_FILE_PATH= "/deneme.json"
+
+```
+
+### Listen Consul Key Value Changes
+```xml
+export CONSUL_HTTP_ADDR= "http://localhost:8500"
 
 ```
