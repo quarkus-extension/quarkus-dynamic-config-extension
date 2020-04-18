@@ -1,4 +1,4 @@
-package quarkus.extension.dynamic.config;
+package com.github.previousdeveloper.dynamic.config;
 
 import org.eclipse.microprofile.config.Config;
 import org.json.JSONArray;

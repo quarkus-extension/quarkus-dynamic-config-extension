@@ -1,4 +1,4 @@
-package quarkus.extension.dynamic.config;
+package com.github.previousdeveloper.dynamic.config;
 
 public interface DynamicConfigProvider {
     String get(String key);

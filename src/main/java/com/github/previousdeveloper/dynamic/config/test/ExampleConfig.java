@@ -1,4 +1,4 @@
-package quarkus.extension.dynamic.config.test;
+package com.github.previousdeveloper.dynamic.config.test;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

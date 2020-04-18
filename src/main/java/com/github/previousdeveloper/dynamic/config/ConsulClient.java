@@ -1,4 +1,4 @@
-package quarkus.extension.dynamic.config;
+package com.github.previousdeveloper.dynamic.config;
 
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.KeyValueClient;

@@ -1,4 +1,4 @@
-package quarkus.extension.dynamic.config;
+package com.github.previousdeveloper.dynamic.config;
 
 public class DefaultProvider implements DynamicConfigProvider {
 
