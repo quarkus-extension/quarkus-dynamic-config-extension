@@ -1,6 +1,6 @@
 # Quarkus Dynamic Config Extension
 
-![Maven Central](https://img.shields.io/maven-central/v/com.github.quarkus-extension/dynamic-config?color=green&style=plastic)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.quarkus-extension/dynamic-config?color=green&style=plastic)](https://search.maven.org/artifact/com.github.quarkus-extension/dynamic-config)
 ![Issues](https://img.shields.io/github/issues/quarkus-extension/quarkus-dynamic-config-extension)
 ![Stars](https://img.shields.io/github/stars/quarkus-extension/quarkus-dynamic-config-extension)
 
