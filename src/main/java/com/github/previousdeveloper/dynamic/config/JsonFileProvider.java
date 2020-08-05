@@ -11,15 +11,20 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class JsonFileProvider implements DynamicConfigProvider {
     private Map<String, String> cache;
     private Optional<String> filePath;
     private Map<String, String> data = new HashMap<>();
 
+
     public JsonFileProvider(Config config) {
         filePath = config.getOptionalValue("CONFIG_FILE_PATH", String.class);
-        cache = getProperties();
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> cache = getProperties(), 0, 5, TimeUnit.SECONDS);
     }
 
     @Override
@@ -49,7 +54,7 @@ public class JsonFileProvider implements DynamicConfigProvider {
             result = sb.toString();
             br.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            return "";
         }
         return result;
     }

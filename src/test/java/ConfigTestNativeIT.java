@@ -1,5 +1,5 @@
-import io.quarkus.test.junit.NativeImageTest;
-
-@NativeImageTest
-public class ConfigTestNativeIT extends ConfigTestIT {
-}
+//import io.quarkus.test.junit.NativeImageTest;
+//
+//@NativeImageTest
+//public class ConfigTestNativeIT extends ConfigTestIT {
+//}
