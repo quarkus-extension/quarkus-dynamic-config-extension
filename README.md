@@ -19,7 +19,7 @@ Quarkus dynamic extension watches config file and changes value at runtime
 <dependency>
       <groupId>com.github.quarkus-extension</groupId>
       <artifactId>dynamic-config</artifactId>
-      <version>0.0.2</version>
+      <version>0.0.3</version>
 </dependency>
 ```
 
